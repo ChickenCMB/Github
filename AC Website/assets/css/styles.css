@@ -73,11 +73,13 @@ body.light .footer {
 }
 
 .button-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 40px;
   margin-bottom: 2rem;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 body.dark {
@@ -322,67 +324,6 @@ body.light .hamburger {
   color: #333;
 }
 
-@media (min-width: 1024px) {
-  .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .logo-container {
-    width: 100%;
-    justify-content: space-between;
-  }
-}
-
-@media (min-width: 1024px) {
-  .nav-container {
-    order: initial;
-    width: auto;
-    justify-content: flex-end;
-  }
-  
-  .top-bar {
-    flex-wrap: nowrap;
-  }
-  
-  .search-input:focus {
-    width: 250px;
-  }
-}
-
-@media (max-width: 1023px) {
-  .nav-links {
-    display: none;
-  }
-  
-  .hamburger {
-    display: block;
-  }
-}
-
-@media (max-width: 640px) {
-  .top-bar {
-    padding: 10px 15px;
-  }
-  
-  .search-toggle-container {
-    width: 100%;
-    order: 3;
-  }
-  
-  .search-input {
-    width: 100%;
-    max-width: none;
-  }
-  
-  .mode-toggle span:last-child {
-    display: none;
-  }
-}
-
 .sidebar {
   height: 100%;
   width: 0;
@@ -442,21 +383,13 @@ body.light .close-btn {
   color: #333;
 }
 
-.button-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 2rem;
-}
-
 .custom-button {
-  width: var(--btn-width);
-  height: var(--btn-height);
+  width: 100%;
+  aspect-ratio: 1 / 1;
   background-color: #333333;
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+ 自由: no-repeat;
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
@@ -467,41 +400,14 @@ body.light .close-btn {
 }
 
 .custom-button:hover {
-transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .button-overlay {
- background: rgba(0, 0, 0, 0.5);
- padding: 8px;
- border-radius: 8px;
- display: inline-block;
-}
-
-@media (max-width: 768px) {
-.button-container {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  padding: 15px;
-}
-
-.custom-button {
-  padding-bottom: 120%;
-}
-}
-
-@media (max-width: 480px) {
-.button-container {
-  grid-template-columns: 1fr;
-  max-width: 300px;
-}
-
-.custom-button {
-  padding-bottom: 100%;
-}
-
-.button-overlay {
-  padding: 10px;
-}
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-block;
 }
 
 .section-header {
@@ -517,56 +423,198 @@ body.light .section-header {
 }
 
 #imageModal {
-display: none;
+  display: none;
 }
 
 #modalOverlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.4);
-backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
-display: flex;
-justify-content: center;
-align-items: center;
-z-index: 9999;
-opacity: 0;
-transition: opacity 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 #imageModal.show #modalOverlay {
-opacity: 1;
+  opacity: 1;
 }
 
 #modalImage {
-max-width: 90%;
-max-height: 90%;
-border-radius: 12px;
-box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-opacity: 0;
-transform: scale(0.95);
-transition: opacity 0.4s ease, transform 0.4s ease;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #imageModal.show #modalImage {
-opacity: 1;
-transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 
 #closeModal {
-position: absolute;
-top: 40px;
-right: 40px;
-font-size: 2rem;
-color: white;
-cursor: pointer;
-z-index: 10000;
-transition: color 0.3s;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10000;
+  transition: color 0.3s;
 }
 
 #closeModal:hover {
   color: #f44336;
+}
+
+/* Responsive Design */
+
+/* Large screens (PC, ≥1024px) */
+@media (min-width: 1024px) {
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .nav-container {
+    order: initial;
+    width: auto;
+    justify-content: flex-end;
+  }
+
+  .top-bar {
+    flex-wrap: nowrap;
+  }
+
+  .search-input:focus {
+    width: 250px;
+  }
+
+  .button-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 20px;
+  }
+
+  .custom-button {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Medium screens (tablets, ≤1023px) */
+@media (max-width: 1023px) {
+  .logo-container {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .button-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 15px;
+  }
+
+  .custom-button {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Small tablets (≤768px) */
+@media (max-width: 768px) {
+  .button-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .custom-button {
+    aspect-ratio: 4 / 3;
+  }
+
+  .section-header {
+    font-size: 20px;
+    padding: 20px 15px;
+  }
+}
+
+/* Mobile devices (≤576px) */
+@media (max-width: 576px) {
+  body {
+    font-size: 14px;
+  }
+
+  .top-bar {
+    padding: 8px 12px;
+  }
+
+  .search-toggle-container {
+    width: 100%;
+    order: 3;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .mode-toggle span:last-child {
+    display: none;
+  }
+
+  .button-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .custom-button {
+    aspect-ratio: 4 / 3;
+  }
+
+  .section-header {
+    font-size: 18px;
+    padding: 15px 10px;
+  }
+}
+
+/* Extra small mobile devices (≤400px) */
+@media (max-width: 400px) {
+  .button-container {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .custom-button {
+    aspect-ratio: 1 / 1;
+  }
+
+  .button-overlay {
+    padding: 6px;
+  }
+
+  .section-header {
+    font-size: 16px;
+    padding: 10px 8px;
+  }
 }
