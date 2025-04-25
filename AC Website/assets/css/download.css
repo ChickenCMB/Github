@@ -10,7 +10,7 @@
 
 @font-face {
   font-family: 'CustomFont';
-  src: url('../fonts/MinecraftRegular-Bmg3.otf') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ChickenCMB/Github@main/AC%20Website/assets/fonts/MinecraftRegular-Bmg3.otf') format('woff2');
 }
 
 .map-title {
