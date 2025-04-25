@@ -483,17 +483,19 @@ margin: 0 auto;
 }
 
 .custom-button {
-  position: relative;
-  height: 350px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  background-color: #292929;
-  overflow: hidden;
+  width: var(--btn-width);
+  height: var(--btn-height);
+  background-color: #333333;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-  transition: transform 0.2s ease-in-out;
+  background-repeat: no-repeat;
+  border-radius: var(--border-radius);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s;
 }
 
 .custom-button:hover {
