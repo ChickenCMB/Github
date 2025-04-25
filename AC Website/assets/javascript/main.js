@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => { 
-  // Modal and Image Modal Logic
   const modal = document.getElementById("imageModal");
   const modalImg = document.getElementById("modalImage");
   const overlay = document.getElementById("modalOverlay");
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Close Modal Logic
   overlay.addEventListener("click", (e) => {
     if (e.target === overlay || e.target === closeBtn) {
       modal.classList.remove("show");
@@ -38,33 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         modalImg.src = "";
       }, 300);
     }
-  });
-
-  // Handling Reload and URL Parameters (v, i)
-  const alreadyReloaded = sessionStorage.getItem("alreadyReloaded");
-
-  if (!alreadyReloaded) {
-    sessionStorage.setItem("alreadyReloaded", "true");
-
-    const url = new URL(window.location.href);
-    if (!url.searchParams.has("v")) {
-      url.searchParams.set("v", Date.now());
-      window.location.replace(url.toString());
-    }
-  } else {
-    const url = new URL(window.location.href);
-
-    // Clean up URL by removing parameters (v, i)
-    if (url.searchParams.has("v")) {
-      url.searchParams.delete("v");
-      window.history.replaceState({}, document.title, url.toString());
-    }
-
-    if (url.searchParams.has("i")) {
-      url.searchParams.delete("i");
-      window.history.replaceState({}, document.title, url.toString());
-    }
-  }
 });
 
 function toggleMode() {
@@ -79,14 +50,12 @@ function toggleMode() {
   text.textContent = isDark ? "Light Mode" : "Dark Mode";
 }
 
-// Apply saved theme or default to dark
 window.addEventListener("DOMContentLoaded", () => {
   const savedTheme = localStorage.getItem("theme") || "dark";
   document.body.classList.add(savedTheme);
   document.getElementById("modeIcon").textContent = savedTheme === "dark" ? "🌙" : "☀️";
   document.getElementById("modeText").textContent = savedTheme === "dark" ? "Dark Mode" : "Light Mode";
   
-  // Set up search input
   const searchInput = document.getElementById('searchInput');
   const searchResults = document.getElementById('searchResults');
   
@@ -114,7 +83,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Close sidebar when clicking outside
 document.addEventListener('click', function(event) {
   const sidebar = document.getElementById('sidebar');
   const hamburger = document.querySelector('.hamburger');
@@ -125,7 +93,6 @@ document.addEventListener('click', function(event) {
   }
 });
 
-// Sidebar
 function setupSidebar() {
   const sidebar = document.getElementById('sidebar');
   const hamburger = document.querySelector('.hamburger');
@@ -136,7 +103,6 @@ function setupSidebar() {
   
   hamburger.addEventListener('click', toggleSidebar);
   
-  // Close when clicking outside
   document.addEventListener('click', (event) => {
     if (sidebar.classList.contains('open') && 
         !sidebar.contains(event.target) && 
