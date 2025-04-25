@@ -501,12 +501,12 @@ box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 transform: scale(1.05);
 }
 
-        .button-overlay {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 8px;
-            border-radius: 8px;
-            display: inline-block;
-        }
+.button-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px;
+  border-radius: 8px;
+  display: inline-block;
+}
 
 @media (max-width: 768px) {
 .button-container {
