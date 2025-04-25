@@ -7,19 +7,19 @@ const searchData = [
   {
     title: "Maps",
     description: "Search for a maps",
-    url: "maps.html",
+    url: "https://ac.great-site.net/ac-maps",
     type: "Map",
   },
   {
     title: "Add-Ons",
     description: "Collection of useful add-ons for AC",
-    url: "addons.html",
+    url: "https://ac.great-site.net/ac-addons",
     type: "Add-On",
   },
   {
     title: "Skins Pack",
     description: "Custom skins for AC community",
-    url: "skin.html",
+    url: "https://ac.great-site.net/ac-skins",
     type: "Skin",
   },
   {
