@@ -36,6 +36,31 @@ document.addEventListener("DOMContentLoaded", () => {
         modalImg.src = "";
       }, 300);
     }
+  });
+
+  const alreadyReloaded = sessionStorage.getItem("alreadyReloaded");
+
+  if (!alreadyReloaded) {
+    sessionStorage.setItem("alreadyReloaded", "true");
+
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("v")) {
+      url.searchParams.set("v", Date.now());
+      window.location.replace(url.toString());
+    }
+  } else {
+    const url = new URL(window.location.href);
+
+    if (url.searchParams.has("v")) {
+      url.searchParams.delete("v");
+      window.history.replaceState({}, document.title, url.toString());
+    }
+
+    if (url.searchParams.has("i")) {
+      url.searchParams.delete("i");
+      window.history.replaceState({}, document.title, url.toString());
+    }
+  }
 });
 
 function toggleMode() {
@@ -75,7 +100,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
   
-  // Close search results when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.search-container')) {
       searchResults.style.display = 'none';
