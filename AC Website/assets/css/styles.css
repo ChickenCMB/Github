@@ -90,7 +90,7 @@ body.dark {
 body.light {
   --loading-bg: #fafafa;
   --loading-text: #000000;
-  background: #e2e2e2;
+  background: #fafafa;
   color: #1e1e1e;
 }
 
