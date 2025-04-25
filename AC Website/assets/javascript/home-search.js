@@ -1,102 +1,73 @@
 document.getElementById("currentYear").textContent = new Date().getFullYear();
 
+const searchInput = document.querySelector('.search-input');
+const searchResults = document.querySelector('.search-results');
+
 const searchData = [
-    {
-        title: "Maps",
-        description: "Search for a maps",
-        url: "maps.html",
-        type: "Map",
-    },
-    {
-        title: "Add-Ons",
-        description: "Collection of useful add-ons for AC",
-        url: "addons.html",
-        type: "Add-On",
-    },
-    {
-        title: "Skins Pack",
-        description: "Custom skins for AC community",
-        url: "skin.html",
-        type: "Skin",
-    },
-    {
-        title: "About AC Community",
-        description: "Learn about the AC Community creators",
-        url: "#",
-        type: "About",
-        action: "toggleAboutModal();"
-    }
+  {
+    title: "Maps",
+    description: "Search for a maps",
+    url: "maps.html",
+    type: "Map",
+  },
+  {
+    title: "Add-Ons",
+    description: "Collection of useful add-ons for AC",
+    url: "addons.html",
+    type: "Add-On",
+  },
+  {
+    title: "Skins Pack",
+    description: "Custom skins for AC community",
+    url: "skin.html",
+    type: "Skin",
+  },
+  {
+    title: "About AC Community",
+    description: "Learn about the AC Community creators",
+    url: "#",
+    type: "About",
+    action: "toggleAboutModal();"
+  }
 ];
 
-function performSearch(query) {
-    const resultsContainer = document.getElementById('searchResults');
-    resultsContainer.innerHTML = '';
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.trim().toLowerCase();
+  searchResults.innerHTML = '';
 
-    if (query.trim() === '') {
-        resultsContainer.style.display = 'none';
-        return;
-    }
+  if (query.length === 0) {
+    searchResults.style.display = 'none';
+    return;
+  }
 
-    const lowerQuery = query.toLowerCase();
-    const filteredResults = searchData.filter(item =>
-        item.title.toLowerCase().includes(lowerQuery) ||
-        item.description.toLowerCase().includes(lowerQuery)
-    );
+  const filtered = searchData.filter(item =>
+    item.title.toLowerCase().includes(query) ||
+    item.description.toLowerCase().includes(query) ||
+    item.type.toLowerCase().includes(query)
+  );
 
-    if (filteredResults.length > 0) {
-        filteredResults.forEach(result => {
-            const resultItem = document.createElement('div');
-            resultItem.className = 'search-result-item';
-            resultItem.innerHTML = `
-                <h4>${result.title}</h4>
-                <p>${result.description} • ${result.type}</p>
-            `;
+  if (filtered.length === 0) {
+    searchResults.innerHTML = `<div class="no-results">No results found</div>`;
+  } else {
+    filtered.forEach(item => {
+      const button = document.createElement('button');
+      button.className = 'search-result-button';
+      button.innerHTML = `
+        <div class="search-result-info">
+          <h4>${item.title}</h4>
+          <p>${item.description}</p>
+        </div>
+      `;
 
-            resultItem.addEventListener('click', () => {
-                if (result.action) {
-                    eval(result.action);
-                } else {
-                    window.location.href = result.url;
-                }
-                resultsContainer.style.display = 'none';
-                document.getElementById('searchInput').value = '';
-            });
+      if (item.action) {
+        button.setAttribute('onclick', item.action);
+      } else {
+        button.onclick = () => window.location.href = item.url;
+      }
 
-            resultsContainer.appendChild(resultItem);
-        });
-    } else {
-        const noResults = document.createElement('div');
-        noResults.className = 'no-results';
-        noResults.textContent = 'No results found';
-        resultsContainer.appendChild(noResults);
-    }
+      searchResults.appendChild(button);
+    });
+  }
 
-    resultsContainer.style.display = 'block';
-}
-
-const searchInput = document.getElementById('searchInput');
-const searchResults = document.getElementById('searchResults');
-
-searchInput.addEventListener('input', (e) => {
-    performSearch(e.target.value);
-});
-
-searchInput.addEventListener('focus', () => {
-    if (searchInput.value.trim() !== '') {
-        performSearch(searchInput.value);
-    }
-});
-
-document.addEventListener('click', (e) => {
-    if (!e.target.closest('.search-container')) {
-        searchResults.style.display = 'none';
-    }
-});
-
-searchInput.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        const firstResult = searchResults.querySelector('.search-result-item');
-        if (firstResult) firstResult.focus();
-    }
+  searchResults.style.display = 'block';
 });
