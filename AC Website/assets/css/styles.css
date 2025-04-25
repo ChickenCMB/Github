@@ -499,7 +499,7 @@ body.light .close-btn {
 
 @font-face {
   font-family: 'CustomFont';
-  src: url('https://ac.great-site.net/assets/fonts/MinecraftRegular-Bmg3.otf') format('woff2');
+  src: url('https://cdn.jsdelivr.net/gh/ChickenCMB/Github@main/fonts/MinecraftTen-VGORe.ttf') format('truetype');
 }
 
 .button-overlay {
